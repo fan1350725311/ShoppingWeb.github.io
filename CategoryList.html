@@ -1,0 +1,394 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <title>珍珠项链 1号店</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/CategoryList.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="vue">
+<!--网页头部-->
+<header>
+    <div class="soubg">
+        <div class="sou fl">
+            <div class="s_city_b">
+                <span>送货至：广州</span>
+            </div>
+        </div>
+        <div class="fr top_right">
+            <div class="fl">
+                你好!请<a href="loadpage.html">登录</a>
+                <a href="registerpage.html" style="color:#ff4e00;">免费注册</a>&nbsp;|&nbsp;<a href="javascript:void(0)">我的订单</a>&nbsp;|
+            </div>
+            <ul class="ss">
+                <li class="ss_list">
+                    <a href="">收藏夹</a>
+                </li>
+                <li class="ss_list ss_listBg">
+                    <a href="">客户服务</a>
+
+                    <div class="ss_list_bg">
+                        <div class="ss_list_c">
+                            <ul>
+                                <li><a href="">包裹跟踪</a></li>
+                                <li><a href="">常见问题</a></li>
+                                <li><a href="">在线退款</a></li>
+                                <li><a href="">在线投诉</a></li>
+                                <li><a href="">配送范围</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li class="ss_list">
+                    <a href="">网站导航</a>
+                </li>
+            </ul>
+            <span class="fl">|&nbsp;关注我们：</span>
+                <span class="s_sh">
+                    <a href="" class="sh1">新浪</a>
+                    <a href="" class="sh2">微信</a>
+                </span>
+                <span class="fr">|&nbsp;
+                    <a href="">手机版&nbsp;
+                        <img src="images/s_tel.png" align="absmiddle"/>
+                    </a>
+                </span>
+        </div>
+    </div>
+
+    <div class="top">
+        <div class="logo">
+            <a href="">
+                <img src="images/logo.png"/>
+            </a>
+        </div>
+        <div class="search">
+            <form>
+                <input type="search" value="" placeholder="请输入关键字" class="s_ipt"/>
+                <input type="submit" value="搜索" class="s_btn"/>
+            </form>
+            <div class="fl">
+                <a href="">咖啡</a>
+                <a href="">iphone 6S</a>
+                <a href="">新鲜美食</a>
+                <a href="">蛋糕</a>
+                <a href="">日用品</a>
+                <a href="">连衣裙</a>
+            </div>
+        </div>
+        <div class="i_car">
+            <div class="car_t">购物车</div>
+            <div class="last">
+                <div class="noshop">
+                    <img src="images/icon_tips2.png" alt=""/>
+                    <h3>你的1号店购物车还是空的</h3>
+                </div>
+                <div class="shop">
+                    <!--临时添加的样式，解决购物车滚动条问题-->
+                    <ul style="width:320px;height:450px;overflow-y: auto;"  v-cloak>
+                        <li v-for="(item,index) in shopCar">
+                            <h4>{{ item.shopCar_title }}<span class="J_count">共{{ item.num }}件商品</span></h4>
+                            <div class="clear">
+                                <div class="shopImg">
+                                    <img :src="item.shopCar_pic" alt=""/>
+                                </div>
+                                <div class="shopText">
+                                    <div class="clear">
+                                        <h5>{{ item.shopCar_commodity }}</h5>
+                                        <a href="javascript:void(0)" class="close J_btnDelete">X</a>
+                                    </div>
+                                    <p>{{ item.shopCar_commDetails}}</p>
+                                    <div class="clear">
+                                        <div class="plush">
+                                            <span class="J_btnDelCount" @click="minus(index)">-</span>
+                                            <input class="J_inputCount" type="text" v-model="item.num" value="item.num"/>
+                                            <span class="J_btnAddCount" @click="plus(index)">+</span>
+                                        </div>
+                                        <strong class="J_smallTotalPrice" id="aaa">￥{{ item.Price*item.num }}</strong>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="option"><a href="javascript:void(0)">意见反馈</a></div>
+                    <div class="buy">
+                        <p>合计 <span class="J_totalPrice">￥{{shopCarTotal}}</span></p>
+                        <a href="javascript:void(0)">立即结算 <span class="J_totalCount"></span></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<!--网页主体内容-->
+<section class="center">
+    <!--Begin Menu Begin-->
+    <div class="menu_bg">
+        <div class="menu">
+            <!--Begin 商品分类详情 Begin-->
+            <nav class="nav">
+                <div class="nav_t">全部商品分类</div>
+            </nav>
+            <!--End 商品分类详情 End-->
+            <nav>
+                <ul class="menu_r">
+                    <li><a href="index.html">首页</a></li>
+                    <li class="active"><a href="">自营超市</a></li>
+                    <li><a href="">1号团</a></li>
+                    <li><a href="">1号超市</a></li>
+                    <li><a href="">女装</a></li>
+                    <li><a href="">美妆</a></li>
+                    <li><a href="">1号海购</a></li>
+                    <li><a href="">团购</a></li>
+                </ul>
+            </nav>
+            <a href="javascript:void(0)" class="m_ad"><img src="images/phone.png" alt=""/></a>
+        </div>
+    </div>
+    <!--End Menu End-->
+    <div class="i_bg">
+        <div class="postion">
+            <span class="fl">全部 > 珠宝饰品 > 珍珠项链 > </span>
+        <span class="n_ch">
+            <span class="fl">品牌：<i>珠韵首饰</i></span>
+        </span>
+        </div>
+        <!--Begin 筛选条件 Begin-->
+        <div class="content ">
+            <table border="0" class="choice">
+                <tr>
+                    <td width="70">&nbsp; 品牌：</td>
+                    <td class="td_a">
+                        <a href="javascript:void(0)" class="now">珠韵首饰/ZHUYUN JEWELLERY</a>
+                        <a href="javascript:void(0)">施华洛世奇/Swarovski</a>
+                        <a href="javascript:void(0)">海瞳</a>
+                        <a href="javascript:void(0)">周大福/CHOW TAI FOOK</a>
+                        <a href="javascript:void(0)">京润珍珠</a>
+                        <a href="javascript:void(0)">佰色传情 /BRI.R</a>
+                        <a href="javascript:void(0)">迈姿/Maizi</a>
+                        <a href="javascript:void(0)">Ginasy Jewelry</a>
+                        <a href="javascript:void(0)">心鑫圆</a>
+                        <a href="javascript:void(0)">银斯妮/yin si ni silver</a>
+                        <a href="javascript:void(0)">迈姿/Maizi</a>
+                        <a href="javascript:void(0)">Ginasy Jewelry</a>
+                        <a href="javascript:void(0)">蛟蓓</a>
+                        <a href="javascript:void(0)">芭比/Barbie</a>
+                        <a href="javascript:void(0)">珍福祥</a>
+                        <a href="javascript:void(0)">珍福祥</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp; 价格：</td>
+                    <td class="td_a">
+                        <a href="javascript:void(0)" :class="{'now':IsCheckPriceList==index}" v-for="(item,index) in CommodityPriceList" @click="SelectPriceList(index)">{{ item }}</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>珍珠颜色：</td>
+                    <td class="td_a">
+                        <a href="javascript:void(0)">混彩</a>
+                        <a href="javascript:void(0)">黑色系</a>
+                        <a href="javascript:void(0)">粉色系</a>
+                        <a href="javascript:void(0)">白色系</a>
+                        <a href="javascript:void(0)">金色系</a>
+                        <a href="javascript:void(0)">紫色系</a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>珍珠分类：</td>
+                    <td class="td_a">
+                        <a href="javascript:void(0)">天然海水珍珠</a>
+                        <a href="javascript:void(0)">养殖海水珍珠</a>
+                        <a href="javascript:void(0)">养殖淡水珍珠</a>
+                        <a href="javascript:void(0)">天然淡水珍珠</a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <!--End 筛选条件 End-->
+
+        <div class="content ">
+            <div class="l_history">
+                <div class="his_t">
+                    <span class="fl">浏览历史</span>
+                    <span class="fr"><a href="javascript:void(0)">清空</a></span>
+                </div>
+                <ul>
+                    <li>
+                        <div class="img"><a href="javascript:void(0)"><img src="images/his_1.jpg" /></a></div>
+                        <div class="name"><a href="javascript:void(0)">Dior/迪奥香水2件套装</a></div>
+                        <div class="price">
+                            <span>￥368.00</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img"><a href="javascript:void(0)"><img src="images/his_2.jpg" /></a></div>
+                        <div class="name"><a href="javascript:void(0)">Dior/迪奥香水2件套装</a></div>
+                        <div class="price">
+                            <span>￥768.00</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img"><a href=""><img src="images/his_3.jpg" /></a></div>
+                        <div class="name"><a href="">Dior/迪奥香水2件套装</a></div>
+                        <div class="price">
+                            <span>￥680.00</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img"><a href=""><img src="images/his_4.jpg" /></a></div>
+                        <div class="name"><a href="javascript:void(0)">Dior/迪奥香水2件套装</a></div>
+                        <div class="price">
+                            <span>￥368.00</span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="img"><a href="javascript:void(0)"><img src="images/his_5.jpg" /></a></div>
+                        <div class="name"><a href="javascript:void(0)">Dior/迪奥香水2件套装</a></div>
+                        <div class="price">
+                            <span>￥368.00</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="l_list">
+                <div class="list_t">
+            	<span class="fl list_or">
+                	<a href="javascript:void(0)">默认</a>
+                    <a href="javascript:void(0)" class="now">
+                        <span class="fl">销量</span>
+                        <span class="i_up">销量从低到高显示</span>
+                        <span class="i_down">销量从高到低显示</span>
+                    </a>
+                    <a href="javascript:void(0)" id="sortPrice">
+                        <span class="fl" data-key="0">价格</span>
+                        <span class="i_up" data-key="1">价格从低到高显示</span>
+                        <span class="i_down" data-key="2">价格从高到低显示</span>
+                    </a>
+                    <a href="javascript:void(0)">新品</a>
+                </span>
+                    <span class="fr">共发现20件</span>
+                </div>
+                <div class="list_c">
+
+                    <ul class="cate_list">
+                        <li v-for="(item,index) in showCommodity">
+                            <div class="img"><a href="javascript:void(0)"><img :src="item.CommodityPic" width="210" height="185"/></a></div>
+                            <div class="price">
+                                <span>￥{{ item.CommodityPrice }}</span>
+                            </div>
+                            <div class="name"><a :href="'Product.html?id='+parseInt(index+1)">{{ item.CommodityName }}</a></div>
+                            <div class="carbg">
+                                <a href="javascript:void(0)" class="ss">收藏</a>
+                                <a href="javascript:void(0)" class="j_car" @click="AddShopCar(index)">加入购物车</a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                    <div class="pages">
+                        <a href="javascript:void(0)" class="p_pre">上一页</a>
+                        <a href="javascript:void(0)" class="cur">1</a>
+                        <a href="javascript:void(0)">2</a>
+                        <a href="javascript:void(0)">3</a>
+                        <span>...</span>
+                        <a href="javascript:void(0)">20</a>
+                        <a href="javascript:void(0)" class="p_pre">下一页</a>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!--网页底部-->
+<footer class="center">
+    <!-- Footer -->
+    <div class="b_btm_bg b_btm_c">
+        <ul class="b_btm">
+            <li>
+                <a><img src="images/b1.png" width="62" height="62"/></a>
+                <div><h2>正品保障</h2>正品行货 放心购买</div>
+            </li>
+            <li >
+                <a><img src="images/b2.png" width="62" height="62"/></a>
+                <div><h2>满38包邮</h2>满38包邮 免运费</div>
+            </li>
+            <li>
+                <a><img src="images/b3.png" width="62" height="62"/></a>
+                <div><h2>天天低价</h2>天天低价 畅选无忧</div>
+            </li>
+            <li>
+                <a><img src="images/b4.png" width="62" height="62"/></a>
+                <div><h2>准时送达</h2>收货时间由你做主</div>
+            </li>
+        </ul>
+    </div>
+    <div class="b_nav">
+        <dl>
+            <dt><a href="javascript:void(0)">新手上路</a></dt>
+            <dd><a href="javascript:void(0)">售后流程</a></dd>
+            <dd><a href="javascript:void(0)">购物流程</a></dd>
+            <dd><a href="javascript:void(0)">订购方式</a></dd>
+            <dd><a href="javascript:void(0)">隐私声明</a></dd>
+            <dd><a href="javascript:void(0)">推荐分享说明</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="javascript:void(0)">配送与支付</a></dt>
+            <dd><a href="javascript:void(0)">货到付款区域</a></dd>
+            <dd><a href="javascript:void(0)">配送支付查询</a></dd>
+            <dd><a href="javascript:void(0)">支付方式说明</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="javascript:void(0)">会员中心</a></dt>
+            <dd><a href="javascript:void(0)">资金管理</a></dd>
+            <dd><a href="javascript:void(0)">我的收藏</a></dd>
+            <dd><a href="javascript:void(0)">我的订单</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="javascript:void(0)">服务保证</a></dt>
+            <dd><a href="javascript:void(0)">退换货原则</a></dd>
+            <dd><a href="javascript:void(0)">售后服务保证</a></dd>
+            <dd><a href="javascript:void(0)">产品质量保证</a></dd>
+        </dl>
+        <dl>
+            <dt><a href="javascript:void(0)">联系我们</a></dt>
+            <dd><a href="javascript:void(0)">网站故障报告</a></dd>
+            <dd><a href="javascript:void(0)">购物咨询</a></dd>
+            <dd><a href="javascript:void(0)">投诉与建议</a></dd>
+        </dl>
+        <div class="b_tel_bg">
+            <a href="javascript:void(0)" class="b_sh1">新浪微博</a>
+            <a href="javascript:void(0)" class="b_sh2">腾讯微博</a>
+
+            <p>
+                服务热线：<br/>
+                <span>400-123-4567</span>
+            </p>
+        </div>
+        <div class="b_er">
+            <div class="b_er_c"><img src="images/er.gif" /></div>
+            <img src="images/ss.png"/>
+        </div>
+    </div>
+    <div class="btmbg">
+        <div class="btm">
+            备案/许可证编号：蜀ICP备12009302号-1-www.dingguagua.com Copyright© 1号店网上超市 2007-2019，All Rights Reserved. 复制必究 ,
+            Technical Support: Dgg Group <br/>
+            <img src="images/b_1.gif"/>
+            <img src="images/b_2.gif"/>
+            <img src="images/b_3.gif"/>
+            <img src="images/b_4.gif"/>
+            <img src="images/b_5.gif"/>
+            <img src="images/b_6.gif"/>
+        </div>
+    </div>
+    <!--Footer -->
+</footer>
+</div>
+</body>
+</html>
